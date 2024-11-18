@@ -1,0 +1,49 @@
+* {
+  font-family: "Outfit", sans-serif;
+  color: white;
+}
+
+#logoEpicode {
+  width: 20%;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 6em;
+  line-height: 0.8em;
+}
+
+span {
+  font-weight: bold;
+}
+
+h3 {
+  color: #c2128d;
+  font-size: 2.3em;
+  margin-bottom: 0;
+}
+
+.parFirstPage {
+  margin-top: 0;
+  font-size: 1.8em;
+  font-weight: 200;
+}
+
+.listFirstPage {
+  font-size: 1.8em;
+  font-weight: 200;
+}
+
+main {
+  background-image: url("/assets/img/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-position: center;
+}
+
+#borderContainer {
+  padding: 9rem;
+  border: 3px solid white;
+}

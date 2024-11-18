@@ -4,31 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Build Week</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <main>
-      <div><img /></div>
+      <div id="borderContainer">
+        <div><img src="assets/img/epicode_logo.png" id="logoEpicode" /></div>
 
-      <div>
-        <h1></h1>
-        <h3></h3>
-      </div>
+        <div>
+          <h1>
+            Welcome to <br />
+            <span>your exam</span>
+          </h1>
+          <h3>Instructions</h3>
+        </div>
 
-      <div>
-        <p></p>
-      </div>
-      <div>
-        <ul>
-          <li></li>
-        </ul>
-      </div>
+        <div>
+          <p class="parFirstPage">
+            We don't expect most engineers to know the answers to all of these
+            questions, so don't worry if you're unsure of a few of them.
+          </p>
+        </div>
+        <div>
+          <ul class="listFirstPage">
+            <li>
+              Each question is <span>timed</span> and can only be
+              <span>answered once</span>
+            </li>
+            <li>
+              Charging browser tab or opening other windows will
+              <span>invalidate the question</span>.
+            </li>
+            <li>This exam will take approx. <span>0-5 minutes</span>.</li>
+          </ul>
+        </div>
 
-      <div>
-        <button></button>
+        <div>
+          <input type="checkbox" name="checkboxFirstPage" required />
+          <label for="checkboxFirstPage"
+            >I promise to answer myself without help from anyone</label
+          >
 
-        <button></button>
+          <button id="btnProceed">PROCEED</button>
+        </div>
       </div>
     </main>
 
