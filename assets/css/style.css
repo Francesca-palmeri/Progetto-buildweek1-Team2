@@ -56,7 +56,7 @@ main {
   font-size: 18px;
   font-weight: 600;
   padding: 20px 35px;
-  margin-left: 40%;
+  float: right;
   cursor: pointer;
 }
 
@@ -69,6 +69,10 @@ main {
 #advice {
   color: #c2128d;
   visibility: hidden;
+}
+
+#aLink {
+  float: right;
 }
 
 a:link,
