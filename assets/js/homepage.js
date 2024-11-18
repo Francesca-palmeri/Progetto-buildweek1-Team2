@@ -3,7 +3,7 @@ const btnCheckBox = document.getElementById("checkboxFirstPage");
 const aLink = document.getElementById("aLink");
 const advice = document.getElementById("advice");
 //const adviceText = document.getElementById("advice").innerText;
-advice.style.visibility = "hidden";
+
 let valueCheckBox = btnCheckBox.checked;
 
 btnProceed.addEventListener(
