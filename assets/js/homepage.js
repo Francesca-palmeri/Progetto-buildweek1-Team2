@@ -2,7 +2,6 @@ const btnProceed = document.getElementById("btnProceed");
 const btnCheckBox = document.getElementById("checkboxFirstPage");
 const aLink = document.getElementById("aLink");
 const advice = document.getElementById("advice");
-//const adviceText = document.getElementById("advice").innerText;
 
 let valueCheckBox = btnCheckBox.checked;
 
@@ -29,10 +28,8 @@ aLink.onclick = function () {
 btnCheckBox.onclick = function () {
   valueCheckBox = btnCheckBox.checked;
   if (valueCheckBox) {
-    //    advice.innerText = "";
     advice.style.visibility = "hidden";
   } else {
-    //    advice.innerText = adviceText;
     advice.style.visibility = "visible";
   }
 };
