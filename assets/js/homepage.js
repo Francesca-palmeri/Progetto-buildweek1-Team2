@@ -2,7 +2,8 @@ const btnProceed = document.getElementById("btnProceed");
 const btnCheckBox = document.getElementById("checkboxFirstPage");
 const aLink = document.getElementById("aLink");
 const advice = document.getElementById("advice");
-const adviceText = document.getElementById("advice").innerText;
+//const adviceText = document.getElementById("advice").innerText;
+advice.style.visibility = "hidden";
 let valueCheckBox = btnCheckBox.checked;
 
 btnProceed.addEventListener(
@@ -20,14 +21,18 @@ aLink.onclick = function () {
   console.log(valueCheckBox);
   if (valueCheckBox) {
     aLink.setAttribute("href", "quiz.html");
+  } else {
+    advice.style.visibility = "visible";
   }
 };
 
 btnCheckBox.onclick = function () {
   valueCheckBox = btnCheckBox.checked;
   if (valueCheckBox) {
-    advice.innerText = "";
+    //    advice.innerText = "";
+    advice.style.visibility = "hidden";
   } else {
-    advice.innerText = adviceText;
+    //    advice.innerText = adviceText;
+    advice.style.visibility = "visible";
   }
 };
