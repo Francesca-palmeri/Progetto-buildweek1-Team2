@@ -2,7 +2,7 @@ const btnProceed = document.getElementById("btnProceed");
 const btnCheckBox = document.getElementById("checkboxFirstPage");
 const aLink = document.getElementById("aLink");
 const advice = document.getElementById("advice");
-const adviceText = document.getElementById("advice").innerHTML;
+const adviceText = document.getElementById("advice").innerText;
 let valueCheckBox = btnCheckBox.checked;
 
 btnProceed.addEventListener(
@@ -26,8 +26,8 @@ aLink.onclick = function () {
 btnCheckBox.onclick = function () {
   valueCheckBox = btnCheckBox.checked;
   if (valueCheckBox) {
-    advice.innerHTML = "";
+    advice.innerText = "";
   } else {
-    advice.innerHTML = adviceText;
+    advice.innerText = adviceText;
   }
 };
