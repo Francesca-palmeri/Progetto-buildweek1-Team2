@@ -187,6 +187,8 @@ btnNextQuestion.addEventListener("click", proceedToNextQuestion);
 function proceedToNextQuestion() {
   if (questionIndex === 9) {
     verifyAnswer();
+    let storeVerifiedAnswers = verifiedAnswers;
+    localStorage.setItem("correctAnswers", storeVerifiedAnswers);
     window.location.replace("results.html");
   } else {
     questionIndex++;
