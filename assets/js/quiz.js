@@ -4,7 +4,7 @@ const questions = [
     type: "multiple",
     difficulty: "easy",
     question: "What does CPU stand for?",
-    correct_answer: "RISPOSTA CORRETTA: Central Processing Unit",
+    correct_answer: "Central Processing Unit",
     incorrect_answers: [
       "Central Process Unit",
       "Computer Personal Unit",
@@ -17,7 +17,7 @@ const questions = [
     difficulty: "easy",
     question:
       "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn't get modified?",
-    correct_answer: "RISPOSTA CORRETTA: Final",
+    correct_answer: "Final",
     incorrect_answers: ["Static", "Private", "Public"],
   },
   {
@@ -95,18 +95,23 @@ const questions = [
 ];
 
 const timerDiv = document.getElementById("counterTimer");
+const circle = document.getElementById("circle");
 
 let countdown;
 function Timer(questionType) {
+  circle.style.animation = "countdown 46s linear infinite forwards";
   let timer = questionType === "boolean" ? 30 : 45;
+  if (timer === 30) {
+    circle.style.animation = "countdown 31s linear infinite forwards";
+  }
   timerDiv.textContent = `${timer}`;
   countdown = setInterval(() => {
     timer--;
     timerDiv.textContent = `${timer}`;
     if (timer <= -1) {
+      timerDiv.textContent = "0";
       clearInterval(countdown);
-      questionIndex++;
-      printQuestionAndAnswers();
+      proceedToNextQuestion();
     }
   }, 1000);
 }
@@ -122,6 +127,7 @@ btnArr.push(btnAnswer3);
 const btnAnswer4 = document.getElementById("btnAnswer4");
 btnArr.push(btnAnswer4);
 const btnNextQuestion = document.getElementById("btnNextQuestion");
+const questionNumbers = document.getElementById("questionNumbers");
 
 let verifiedAnswers = 0;
 let questionIndex = 0;
@@ -136,19 +142,58 @@ function correctClicked() {
   btnNextQuestion.disabled = false;
   varCorrClicked = true;
   varWrongClicked = false;
+  btnArr[highlightCorrectIndex].classList.add("btnGroupAnswersJS");
 }
 
 function wrongClicked() {
   btnNextQuestion.disabled = false;
   varCorrClicked = false;
   varWrongClicked = true;
+  return true;
 }
+btnAnswer1.addEventListener("click", function () {
+  if (wrongClicked()) {
+    btnAnswer1.classList.add("btnGroupAnswersJS");
+    btnAnswer2.classList.remove("btnGroupAnswersJS");
+    btnAnswer3.classList.remove("btnGroupAnswersJS");
+    btnAnswer4.classList.remove("btnGroupAnswersJS");
+  }
+});
+btnAnswer2.addEventListener("click", function () {
+  if (wrongClicked()) {
+    btnAnswer2.classList.add("btnGroupAnswersJS");
+    btnAnswer1.classList.remove("btnGroupAnswersJS");
+    btnAnswer3.classList.remove("btnGroupAnswersJS");
+    btnAnswer4.classList.remove("btnGroupAnswersJS");
+  }
+});
+btnAnswer3.addEventListener("click", function () {
+  if (wrongClicked()) {
+    btnAnswer3.classList.add("btnGroupAnswersJS");
+    btnAnswer2.classList.remove("btnGroupAnswersJS");
+    btnAnswer1.classList.remove("btnGroupAnswersJS");
+    btnAnswer4.classList.remove("btnGroupAnswersJS");
+  }
+});
+btnAnswer4.addEventListener("click", function () {
+  if (wrongClicked()) {
+    btnAnswer4.classList.add("btnGroupAnswersJS");
+    btnAnswer2.classList.remove("btnGroupAnswersJS");
+    btnAnswer1.classList.remove("btnGroupAnswersJS");
+    btnAnswer3.classList.remove("btnGroupAnswersJS");
+  }
+});
 
 btnNextQuestion.addEventListener("click", proceedToNextQuestion);
 function proceedToNextQuestion() {
-  questionIndex++;
-  verifyAnswer();
-  printQuestionAndAnswers();
+  if (questionIndex === 9) {
+    verifyAnswer();
+    window.location.href = "results.html";
+  } else {
+    questionIndex++;
+    verifyAnswer();
+    printQuestionAndAnswers();
+  }
 }
 
 function verifyAnswer() {
@@ -163,7 +208,24 @@ let varWrongClicked = false;
 
 let incorrectIndex = 0;
 let ranNum = 0;
+
+let highlightCorrectIndex = 0;
+let highlightWrongIndex = 0;
+
 function printQuestionAndAnswers() {
+  questionNumbers.innerText = `Question: ${questionIndex + 1}/10`;
+  btnAnswer1.removeEventListener("click", correctClicked);
+  btnAnswer2.removeEventListener("click", correctClicked);
+  btnAnswer3.removeEventListener("click", correctClicked);
+  btnAnswer4.removeEventListener("click", correctClicked);
+  btnAnswer1.removeEventListener("click", wrongClicked);
+  btnAnswer2.removeEventListener("click", wrongClicked);
+  btnAnswer3.removeEventListener("click", wrongClicked);
+  btnAnswer4.removeEventListener("click", wrongClicked);
+  btnAnswer1.classList.remove("btnGroupAnswersJS");
+  btnAnswer2.classList.remove("btnGroupAnswersJS");
+  btnAnswer3.classList.remove("btnGroupAnswersJS");
+  btnAnswer4.classList.remove("btnGroupAnswersJS");
   btnNextQuestion.disabled = true;
   clearInterval(countdown);
   Timer(questions[questionIndex].type);
@@ -172,26 +234,29 @@ function printQuestionAndAnswers() {
       questionHead.innerText = questions[questionIndex].question;
       ranNum = Math.floor(Math.random() * 4);
 
-      for (let i = 0; i < 4; i++) {
-        switch (ranNum) {
-          case 0:
-            btnAnswer1.innerText = questions[questionIndex].correct_answer;
-            btnAnswer1.addEventListener("click", correctClicked);
-            break;
-          case 1:
-            btnAnswer2.innerText = questions[questionIndex].correct_answer;
-            btnAnswer2.addEventListener("click", correctClicked);
-            break;
-          case 2:
-            btnAnswer3.innerText = questions[questionIndex].correct_answer;
-            btnAnswer3.addEventListener("click", correctClicked);
-            break;
-          case 3:
-            btnAnswer4.innerText = questions[questionIndex].correct_answer;
-            btnAnswer4.addEventListener("click", correctClicked);
-            break;
-        }
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+        case 2:
+          btnAnswer3.innerText = questions[questionIndex].correct_answer;
+          btnAnswer3.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 2;
+          break;
+        case 3:
+          btnAnswer4.innerText = questions[questionIndex].correct_answer;
+          btnAnswer4.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 3;
+          break;
       }
+
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
         if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
@@ -206,25 +271,27 @@ function printQuestionAndAnswers() {
       questionHead.innerText = questions[questionIndex].question;
       ranNum = Math.floor(Math.random() * 4);
 
-      for (let i = 0; i < 4; i++) {
-        switch (ranNum) {
-          case 0:
-            btnAnswer1.innerText = questions[questionIndex].correct_answer;
-            btnAnswer1.addEventListener("click", correctClicked);
-            break;
-          case 1:
-            btnAnswer2.innerText = questions[questionIndex].correct_answer;
-            btnAnswer2.addEventListener("click", correctClicked);
-            break;
-          case 2:
-            btnAnswer3.innerText = questions[questionIndex].correct_answer;
-            btnAnswer3.addEventListener("click", correctClicked);
-            break;
-          case 3:
-            btnAnswer4.innerText = questions[questionIndex].correct_answer;
-            btnAnswer4.addEventListener("click", correctClicked);
-            break;
-        }
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+        case 2:
+          btnAnswer3.innerText = questions[questionIndex].correct_answer;
+          btnAnswer3.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 2;
+          break;
+        case 3:
+          btnAnswer4.innerText = questions[questionIndex].correct_answer;
+          btnAnswer4.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 3;
+          break;
       }
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
@@ -242,20 +309,88 @@ function printQuestionAndAnswers() {
       questionHead.innerText = questions[questionIndex].question;
       ranNum = Math.floor(Math.random() * 2);
 
-      for (let i = 0; i < 2; i++) {
-        switch (ranNum) {
-          case 0:
-            btnAnswer1.innerText = questions[questionIndex].correct_answer;
-            btnAnswer1.addEventListener("click", correctClicked);
-            break;
-          case 1:
-            btnAnswer2.innerText = questions[questionIndex].correct_answer;
-            btnAnswer2.addEventListener("click", correctClicked);
-            break;
-        }
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
       }
       incorrectIndex = 0;
       for (let i = 0; i < 2; i++) {
+        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+          btnArr[i].innerText =
+            questions[questionIndex].incorrect_answers[incorrectIndex];
+          console.log(btnArr[i].innerText);
+          btnArr[i].addEventListener("click", wrongClicked);
+          incorrectIndex++;
+        }
+      }
+      break;
+    case 3:
+      btnAnswer3.style.visibility = "hidden";
+      btnAnswer4.style.visibility = "hidden";
+      questionHead.innerText = questions[questionIndex].question;
+      ranNum = Math.floor(Math.random() * 2);
+
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+      }
+
+      incorrectIndex = 0;
+      for (let i = 0; i < 2; i++) {
+        if (i !== ranNum) {
+          btnArr[i].innerText =
+            questions[questionIndex].incorrect_answers[incorrectIndex];
+          btnArr[i].addEventListener("click", wrongClicked);
+          incorrectIndex++;
+        }
+      }
+      break;
+    case 4:
+      btnAnswer3.style.visibility = "visible";
+      btnAnswer4.style.visibility = "visible";
+      questionHead.innerText = questions[questionIndex].question;
+      ranNum = Math.floor(Math.random() * 4);
+
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+        case 2:
+          btnAnswer3.innerText = questions[questionIndex].correct_answer;
+          btnAnswer3.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 2;
+          break;
+        case 3:
+          btnAnswer4.innerText = questions[questionIndex].correct_answer;
+          btnAnswer4.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 3;
+          break;
+      }
+      incorrectIndex = 0;
+      for (let i = 0; i < 4; i++) {
         if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
@@ -264,36 +399,188 @@ function printQuestionAndAnswers() {
         }
       }
       break;
-    case 3:
-      questionHead.innerText = questions[questionIndex].question;
-
-      break;
-    case 4:
-      questionHead.innerText = questions[questionIndex].question;
-
-      break;
     case 5:
+      btnAnswer3.style.visibility = "visible";
+      btnAnswer4.style.visibility = "visible";
       questionHead.innerText = questions[questionIndex].question;
+      ranNum = Math.floor(Math.random() * 4);
 
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+        case 2:
+          btnAnswer3.innerText = questions[questionIndex].correct_answer;
+          btnAnswer3.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 2;
+          break;
+        case 3:
+          btnAnswer4.innerText = questions[questionIndex].correct_answer;
+          btnAnswer4.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 3;
+          break;
+      }
+      incorrectIndex = 0;
+      for (let i = 0; i < 4; i++) {
+        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+          btnArr[i].innerText =
+            questions[questionIndex].incorrect_answers[incorrectIndex];
+          btnArr[i].addEventListener("click", wrongClicked);
+          incorrectIndex++;
+        }
+      }
       break;
     case 6:
+      btnAnswer3.style.visibility = "visible";
+      btnAnswer4.style.visibility = "visible";
       questionHead.innerText = questions[questionIndex].question;
+      ranNum = Math.floor(Math.random() * 4);
 
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+        case 2:
+          btnAnswer3.innerText = questions[questionIndex].correct_answer;
+          btnAnswer3.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 2;
+          break;
+        case 3:
+          btnAnswer4.innerText = questions[questionIndex].correct_answer;
+          btnAnswer4.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 3;
+          break;
+      }
+      incorrectIndex = 0;
+      for (let i = 0; i < 4; i++) {
+        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+          btnArr[i].innerText =
+            questions[questionIndex].incorrect_answers[incorrectIndex];
+          btnArr[i].addEventListener("click", wrongClicked);
+          incorrectIndex++;
+        }
+      }
       break;
     case 7:
+      btnAnswer3.style.visibility = "visible";
+      btnAnswer4.style.visibility = "visible";
       questionHead.innerText = questions[questionIndex].question;
+      ranNum = Math.floor(Math.random() * 4);
+
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+        case 2:
+          btnAnswer3.innerText = questions[questionIndex].correct_answer;
+          btnAnswer3.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 2;
+          break;
+        case 3:
+          btnAnswer4.innerText = questions[questionIndex].correct_answer;
+          btnAnswer4.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 3;
+          break;
+      }
+      incorrectIndex = 0;
+      for (let i = 0; i < 4; i++) {
+        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+          btnArr[i].innerText =
+            questions[questionIndex].incorrect_answers[incorrectIndex];
+          btnArr[i].addEventListener("click", wrongClicked);
+          incorrectIndex++;
+        }
+      }
 
       break;
     case 8:
+      btnAnswer3.style.visibility = "hidden";
+      btnAnswer4.style.visibility = "hidden";
       questionHead.innerText = questions[questionIndex].question;
+      ranNum = Math.floor(Math.random() * 2);
+
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+      }
+
+      incorrectIndex = 0;
+      for (let i = 0; i < 2; i++) {
+        if (i !== ranNum) {
+          btnArr[i].innerText =
+            questions[questionIndex].incorrect_answers[incorrectIndex];
+          btnArr[i].addEventListener("click", wrongClicked);
+          incorrectIndex++;
+        }
+      }
 
       break;
     case 9:
+      btnAnswer3.style.visibility = "visible";
+      btnAnswer4.style.visibility = "visible";
       questionHead.innerText = questions[questionIndex].question;
+      ranNum = Math.floor(Math.random() * 4);
 
-      break;
-    case 10:
-      questionHead.innerText = questions[questionIndex].question;
+      switch (ranNum) {
+        case 0:
+          btnAnswer1.innerText = questions[questionIndex].correct_answer;
+          btnAnswer1.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 0;
+          break;
+        case 1:
+          btnAnswer2.innerText = questions[questionIndex].correct_answer;
+          btnAnswer2.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 1;
+          break;
+        case 2:
+          btnAnswer3.innerText = questions[questionIndex].correct_answer;
+          btnAnswer3.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 2;
+          break;
+        case 3:
+          btnAnswer4.innerText = questions[questionIndex].correct_answer;
+          btnAnswer4.addEventListener("click", correctClicked);
+          highlightCorrectIndex = 3;
+          break;
+      }
+      incorrectIndex = 0;
+      for (let i = 0; i < 4; i++) {
+        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+          btnArr[i].innerText =
+            questions[questionIndex].incorrect_answers[incorrectIndex];
+          btnArr[i].addEventListener("click", wrongClicked);
+          incorrectIndex++;
+        }
+      }
 
       break;
   }

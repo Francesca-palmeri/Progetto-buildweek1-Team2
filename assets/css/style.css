@@ -3,6 +3,12 @@
   color: white;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 #logoEpicode {
   width: 20%;
   margin-bottom: 2rem;
@@ -37,11 +43,11 @@ h3 {
 }
 
 main {
+  min-height: 100%;
   background-image: url("/assets/img/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
 }
 
 #borderContainer {
@@ -88,7 +94,8 @@ a:visited {
   text-align: right;
   margin: 0;
   margin-left: auto;
-  padding-right: 15px;
+  padding-right: 18px;
+  padding-top: 9px;
 }
 
 #counterTimer {
@@ -126,26 +133,147 @@ svg circle {
 }
 
 #questionHeading {
-  font-size: 2.8em;
+  font-size: 2.6em;
   margin-top: 0;
+  text-align: center;
+  line-height: 1.3;
 }
 
-#btnAnswer1 {
-  color: black;
+.btnGroupAnswers {
+  text-align: center;
 }
 
-#btnAnswer2 {
-  color: black;
+.btnGroupAnswers button {
+  display: inline-block;
+  width: 250px;
+  height: 60px;
+  border: 2px solid white;
+  border-radius: 35px;
+  background-color: rgb(132, 130, 134);
+  opacity: 1;
+  color: white;
+  margin: 1em;
 }
-#btnAnswer3 {
-  color: black;
-}
-#btnAnswer4 {
-  color: black;
+
+.btnGroupAnswers button:hover {
+  background-color: #cb2376;
+  background-image: linear-gradient(to bottom, #cb2376 60%, #ff359aac 100%);
 }
 
 #btnNextQuestion {
-  margin-left: 90%;
+  float: right;
+  color: #0b113b;
   background-color: #00ffff;
-  color: black;
+  box-shadow: 0px 0px 13px 6px #00ffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 25px;
+  float: right;
+  cursor: pointer;
+}
+
+#questionNumbers {
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.btnGroupAnswersJS {
+  background-color: #cb2376;
+  background-image: linear-gradient(to bottom, #cb2376 60%, #ff359aac 100%);
+}
+
+#lastItem {
+  text-align: center;
+  align-content: center;
+}
+
+#resultsTitle h1 {
+  text-align: center;
+  line-height: 1%;
+  font-size: 3rem;
+  font-weight: 700;
+}
+#resultsTitle h4 {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  word-spacing: 0.5px;
+}
+#answersChart {
+  text-align: center;
+}
+#answersChart div {
+  display: inline-block;
+  text-align: center;
+  height: 150px;
+}
+#answersChart h2 {
+  width: 45%;
+  font-size: 2.6rem;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.3px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+#answersChart h2 span {
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: 700;
+  padding: 0 10px 0 20px;
+}
+#answersChart p {
+  font-size: 1rem;
+  font-weight: 200;
+  margin-top: 0;
+  padding-top: 0;
+}
+.graphic {
+  width: 45%;
+}
+#resultsQuestions {
+  width: 100%;
+  margin: 30px 10px 30px 10px;
+  text-align: center;
+}
+#resultsQuestions h4 {
+  margin-bottom: 0;
+  font-size: 1.2rem;
+  word-spacing: 0.6px;
+}
+#resultsQuestions p {
+  margin-top: 0;
+  font-weight: 200;
+}
+#lastButtons {
+  position: relative;
+  color: white;
+  padding: 40px;
+  margin: 60px auto;
+}
+#btnShowAnswers {
+  position: absolute;
+  left: 30px;
+  margin: 20px 0 10px 0;
+  border: 1px solid white;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 18px 30px;
+  cursor: pointer;
+}
+#btnRateUs {
+  position: absolute;
+  right: 30px;
+  margin: 20px 0 10px 0;
+  border: 1px solid white;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 18px 30px;
+  cursor: pointer;
+}
+#reviewTitle h2 {
+  text-align: center;
+  font-size: 3rem;
 }

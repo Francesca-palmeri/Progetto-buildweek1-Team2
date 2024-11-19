@@ -20,23 +20,27 @@
         <div id="countdown">
           <div id="counterTimer">TIMER</div>
           <svg>
-            <circle r="18" cx="20" cy="20"></circle>
+            <circle r="18" cx="20" cy="20" id="circle"></circle>
           </svg>
         </div>
         <div>
           <h1 id="questionHeading">How to create a checkbox in HTML?</h1>
         </div>
-        <div>
+        <div class="btnGroupAnswers">
           <button id="btnAnswer1">Button1</button>
           <button id="btnAnswer2">Button2</button>
+        </div>
+        <div class="btnGroupAnswers">
           <button id="btnAnswer3">Button3</button>
           <button id="btnAnswer4">Button4</button>
         </div>
+
+        <div id="lastItem">
+          <p id="questionNumbers">Question x/10</p>
+          <button id="btnNextQuestion" disabled>PROCEED</button>
+        </div>
       </div>
-      <div>
-        <button id="btnNextQuestion" disabled>PROCEED</button>
-      </div>
-      <p>Question x/10</p>
+      <a href="results.html" style="color: white">vai alla terza pag</a>
     </main>
 
     <script src="assets/js/quiz.js"></script>
