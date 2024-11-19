@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Build Week</title>
+    <title>Build Week -</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,8 +17,28 @@
     <main>
       <div id="borderContainer">
         <div><img src="assets/img/epicode_logo.png" id="logoEpicode" /></div>
-        <h1>CE L'ABBIAMO FATTA</h1>
+        <div id="countdown">
+          <div id="counterTimer">TIMER</div>
+          <svg>
+            <circle r="18" cx="20" cy="20"></circle>
+          </svg>
+        </div>
+        <div>
+          <h1 id="questionHeading">How to create a checkbox in HTML?</h1>
+        </div>
+        <div>
+          <button id="btnAnswer1">Button1</button>
+          <button id="btnAnswer2">Button2</button>
+          <button id="btnAnswer3">Button3</button>
+          <button id="btnAnswer4">Button4</button>
+        </div>
       </div>
+      <div>
+        <button id="btnNextQuestion" disabled>PROCEED</button>
+      </div>
+      <p>Question x/10</p>
     </main>
+
+    <script src="assets/js/quiz.js"></script>
   </body>
 </html>
