@@ -94,22 +94,21 @@ const questions = [
   },
 ];
 
-const timerDiv = document.getElementById("counterTimer");
+const timerNumber = document.getElementById("counterTimer");
 const circle = document.getElementById("circle");
+const totalDashOffset = 314;
 
 let countdown;
 function Timer(questionType) {
-  circle.style.animation = "countdown 46s linear infinite forwards";
   let timer = questionType === "boolean" ? 30 : 45;
-  if (timer === 30) {
-    circle.style.animation = "countdown 31s linear infinite forwards";
-  }
-  timerDiv.textContent = `${timer}`;
+  const initialTime = timer;
+  timerNumber.textContent = `${timer}`;
   countdown = setInterval(() => {
     timer--;
-    timerDiv.textContent = `${timer}`;
+    timerNumber.textContent = `${timer}`;
+    circle.style.strokeDashoffset = totalDashOffset * (1 - timer / initialTime);
     if (timer <= -1) {
-      timerDiv.textContent = "0";
+      timerNumber.textContent = "0";
       clearInterval(countdown);
       proceedToNextQuestion();
     }
@@ -188,7 +187,7 @@ btnNextQuestion.addEventListener("click", proceedToNextQuestion);
 function proceedToNextQuestion() {
   if (questionIndex === 9) {
     verifyAnswer();
-    window.location.href = "results.html";
+    window.location.replace("results.html");
   } else {
     questionIndex++;
     verifyAnswer();
@@ -259,7 +258,7 @@ function printQuestionAndAnswers() {
 
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);
@@ -295,7 +294,7 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);
@@ -323,10 +322,9 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 2; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
-          console.log(btnArr[i].innerText);
           btnArr[i].addEventListener("click", wrongClicked);
           incorrectIndex++;
         }
@@ -391,7 +389,7 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);
@@ -429,7 +427,7 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);
@@ -467,7 +465,7 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);
@@ -505,7 +503,7 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);
@@ -574,7 +572,7 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 4; i++) {
-        if (btnArr[i].innerText !== questions[questionIndex].correct_answer) {
+        if (i !== ranNum) {
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);

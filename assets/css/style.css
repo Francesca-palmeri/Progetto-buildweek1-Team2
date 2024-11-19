@@ -61,6 +61,7 @@ main {
   font-size: 18px;
   font-weight: 600;
   padding: 20px 35px;
+  border: none;
   float: right;
   cursor: pointer;
 }
@@ -91,10 +92,11 @@ a:visited {
   margin-top: 10px;
   height: 100px;
   width: 100px;
-  text-align: right;
+  text-align: center;
+  align-content: center;
   margin: 0;
   margin-left: auto;
-  padding-right: 18px;
+  padding-right: 10px;
   padding-top: 9px;
 }
 
@@ -108,28 +110,18 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
-  width: 50px;
-  height: 40px;
-  transform: scale(1.7) rotateY(-180deg) rotateZ(-90deg);
-}
-
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 0px;
-  }
-  to {
-    stroke-dashoffset: 113px;
-  }
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg);
 }
 
 svg circle {
-  stroke-dasharray: 113px;
-  stroke-dashoffset: 0px;
-  stroke-linecap: round;
+  stroke-dasharray: 314px;
+  stroke-dashoffset: 0;
   stroke-width: 5px;
   stroke: purple;
   fill: none;
-  animation: countdown 45s linear infinite forwards;
+  transition: stroke-dashoffset 1s linear;
 }
 
 #questionHeading {
@@ -168,6 +160,7 @@ svg circle {
   font-size: 15px;
   font-weight: 600;
   padding: 10px 25px;
+  border: none;
   float: right;
   cursor: pointer;
 }
@@ -275,5 +268,54 @@ svg circle {
 }
 #reviewTitle h2 {
   text-align: center;
-  font-size: 3rem;
+  font-size: 3.2rem;
+  margin-bottom: 0;
+}
+#reviewTitle p {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+#rateStars {
+  text-align: center;
+  padding: 50px;
+  align-items: center;
+  justify-content: center;
+  height: 8px;
+  font-size: 1.5em;
+  color: #0b113b;
+  gap: 2px;
+}
+
+#ratestars i {
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+#ratestars.selected {
+  color: #00fefe;
+  text-shadow: #00fefe 1px 0 10px;
+}
+
+#leaveAComment {
+  text-align: center;
+  font-size: 1.2rem;
+}
+#reviewText {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(189, 8, 134);
+  margin-bottom: 40px;
+}
+#moreInfo {
+  color: #0b113b;
+  background-color: #00ffff;
+  box-shadow: 0px 0px 18px 6px #00ffff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 20px 35px;
+  border: none;
+  cursor: pointer;
+  float: inline-end;
 }
