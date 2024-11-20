@@ -19,12 +19,12 @@ numbersCorrect.innerText = `${correctAnswers}/10`;
 numbersWrong.innerText = `${10 - correctAnswers}/10`;
 
 if (correctAnswers >= 6) {
-  mex.innerText = "Congratulations! You passed the exam.";
-  innerSign.innerText = "✔️";
+  mex.innerHTML = `✔️ <span style="color: #00FFFF">Congratulations! You passed the exam.</span>`;
+  innerSign.innerText = "";
 } else {
-  mex.innerText = "You didn't pass the exam.";
+  mex.innerText = "❌ Sorry! You didn't pass the exam.";
   mailSend.style.display = "none";
-  innerSign.innerText = "❌";
+  innerSign.innerText = "";
 }
 
 const myChartsCanvas = document.getElementById("myCharts");
