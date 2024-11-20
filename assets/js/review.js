@@ -1,6 +1,5 @@
 const stars = document.querySelectorAll(".star");
 const btnMoreInfo = document.getElementById("moreInfo");
-let selectedStars = 0;
 let isClicked = false;
 let starIndex = 0;
 
@@ -13,6 +12,45 @@ stars.forEach((star) => {
       }
     });
   });
+});
+
+stars.forEach((star) => {
+  star.addEventListener("mouseleave", function () {
+    stars.forEach((starHov) => {
+      starHov.classList.remove("hovered");
+    });
+  });
+});
+
+stars.forEach((star) => {
+  star.addEventListener("click", function () {
+    isClicked = true;
+    btnMoreInfo.disabled = false;
+    stars.forEach((starArr) => {
+      if (isClicked) {
+        starArr.classList.remove("selected");
+      }
+      if (!(starArr.id > starIndex)) {
+        starArr.classList.add("selected");
+      }
+    });
+  });
+});
+
+btnMoreInfo.addEventListener(
+  "mouseover",
+  () => (btnMoreInfo.style.boxShadow = "0px 0px 26px 6px #00ffff")
+);
+
+btnMoreInfo.addEventListener(
+  "mouseleave",
+  () => (btnMoreInfo.style.boxShadow = "0px 0px 10px 4px #00ffff")
+);
+
+btnMoreInfo.addEventListener("click", function () {
+  if (isClicked) {
+    window.location.href = "https://epicode.com/it/";
+  }
 });
 
 /*
@@ -100,35 +138,3 @@ star10.addEventListener("mouseenter", function () {
     star.classList.toggle("hovered");
   });
 });*/
-
-stars.forEach((star) => {
-  star.addEventListener("mouseleave", function () {
-    stars.forEach((starHov) => {
-      starHov.classList.remove("hovered");
-    });
-  });
-});
-
-stars.forEach((star) => {
-  star.addEventListener("click", function () {
-    isClicked = true;
-    stars.forEach((starArr) => {
-      if (isClicked) {
-        starArr.classList.remove("selected");
-      }
-      if (!(starArr.id > starIndex)) {
-        starArr.classList.add("selected");
-      }
-    });
-  });
-});
-
-btnMoreInfo.addEventListener(
-  "mouseover",
-  () => (btnMoreInfo.style.boxShadow = "0px 0px 26px 6px #00ffff")
-);
-
-btnMoreInfo.addEventListener(
-  "mouseleave",
-  () => (btnMoreInfo.style.boxShadow = "0px 0px 10px 4px #00ffff")
-);

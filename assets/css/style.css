@@ -285,6 +285,7 @@ svg circle {
 
 .wrapper {
   max-width: 100%;
+  min-width: 50%; /*cercare di fissare i laterali*/
   margin-left: 5em;
   margin-right: 5em;
   align-content: center;
