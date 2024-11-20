@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
@@ -26,15 +30,19 @@
             <h2>Correct <br /><span id="percentRight">66.7%</span></h2>
             <p><span id="numbersCorrect">4/6</span> questions</p>
           </div>
-          <div class="graphic">Grafico</div>
+          <!--grafico-->
+          <div class="wrapper">
+            <div id="innerSign">CIAO</div>
+            <canvas id="myCharts"></canvas>
+          </div>
           <div>
-            <h2>Wrong <br /><span id="percentWrong">66.7%</span></h2>
-            <p><span id="numbersWrong">4/6</span> questions</p>
+            <h2>&nbsp;Wrong<br /><span id="percentWrong">66.7%</span></h2>
+            <p>&nbsp; &nbsp; <span id="numbersWrong">4/6</span> questions</p>
           </div>
         </div>
         <div id="resultsQuestions">
-          <h4>Congratulations! <span> You passed the exam.</span></h4>
-          <p>
+          <h4 id="mex">Congratulations! <span> You passed the exam.</span></h4>
+          <p id="mailSend">
             We'll send you the certificate in few minutes.Check your email
             (including promotions / span folder)
           </p>
@@ -49,8 +57,8 @@
           </ul>
         </div>
       </div>
-      <a href="review.html" style="color: white">vai alla quarta pagina</a>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/results.js"></script>
   </body>
 </html>

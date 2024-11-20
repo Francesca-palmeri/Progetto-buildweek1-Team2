@@ -128,6 +128,16 @@ btnArr.push(btnAnswer4);
 const btnNextQuestion = document.getElementById("btnNextQuestion");
 const questionNumbers = document.getElementById("questionNumbers");
 
+btnNextQuestion.addEventListener(
+  "mouseover",
+  () => (btnNextQuestion.style.boxShadow = "0px 0px 26px 6px #00ffff")
+);
+
+btnNextQuestion.addEventListener(
+  "mouseleave",
+  () => (btnNextQuestion.style.boxShadow = "0px 0px 10px 4px #00ffff")
+);
+
 let verifiedAnswers = 0;
 let questionIndex = 0;
 
@@ -214,7 +224,9 @@ let highlightCorrectIndex = 0;
 let highlightWrongIndex = 0;
 
 function printQuestionAndAnswers() {
-  questionNumbers.innerText = `Question: ${questionIndex + 1}/10`;
+  questionNumbers.innerHTML = `Question ${
+    questionIndex + 1
+  }<span class="numeretto"> / 10</span>`;
   btnAnswer1.removeEventListener("click", correctClicked);
   btnAnswer2.removeEventListener("click", correctClicked);
   btnAnswer3.removeEventListener("click", correctClicked);

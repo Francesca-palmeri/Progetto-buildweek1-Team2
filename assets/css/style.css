@@ -9,6 +9,13 @@ body {
   margin: 0;
 }
 
+p {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  margin-top: 0;
+}
+
 #logoEpicode {
   width: 20%;
   margin-bottom: 2rem;
@@ -16,8 +23,9 @@ body {
 
 h1 {
   font-weight: normal;
-  font-size: 6em;
+  font-size: 70px;
   line-height: 0.8em;
+  margin: 50px 0px;
 }
 
 span {
@@ -26,20 +34,16 @@ span {
 
 h3 {
   color: #c2128d;
-  font-size: 2.3em;
   margin-bottom: 0;
-}
-
-.parFirstPage {
-  margin-top: 0;
-  font-size: 1.8em;
-  font-weight: 200;
+  font-size: 2em;
+  margin-top: 10px;
 }
 
 .listFirstPage {
-  font-size: 1.8em;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
   font-weight: 200;
-  margin-bottom: 100px;
+  margin-bottom: 85px;
 }
 
 main {
@@ -51,7 +55,7 @@ main {
 }
 
 #borderContainer {
-  padding: 7rem 9rem 9rem 9rem;
+  padding: 5rem 9rem 33.7px 9rem; /*paddingbottom era di 9rem*/
 }
 
 #btnProceed {
@@ -67,14 +71,65 @@ main {
 }
 
 #checkboxFirstPage {
-  border: 7px solid white;
   vertical-align: middle;
-  background-color: #0b113b;
+}
+
+.container {
+  position: relative;
+  padding-left: 30px;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 13px;
+  width: 13px;
+  background-color: transparent;
+  border: 3px solid white;
+}
+.container:hover input ~ .checkmark {
+  background-color: #ff32c151;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #c2128d;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 3px;
+  top: 0px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 #advice {
   color: #c2128d;
   visibility: hidden;
+  margin-top: 10px;
 }
 
 #aLink {
@@ -104,6 +159,8 @@ a:visited {
   color: white;
   display: inline-block;
   line-height: 40px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 svg {
@@ -118,8 +175,8 @@ svg {
 svg circle {
   stroke-dasharray: 314px;
   stroke-dashoffset: 0;
-  stroke-width: 5px;
-  stroke: purple;
+  stroke-width: 7px;
+  stroke: #00ffff;
   fill: none;
   transition: stroke-dashoffset 1s linear;
 }
@@ -141,15 +198,14 @@ svg circle {
   height: 60px;
   border: 2px solid white;
   border-radius: 35px;
-  background-color: rgb(132, 130, 134);
-  opacity: 1;
+  background-color: transparent;
   color: white;
   margin: 1em;
 }
 
 .btnGroupAnswers button:hover {
-  background-color: #cb2376;
-  background-image: linear-gradient(to bottom, #cb2376 60%, #ff359aac 100%);
+  background-color: #d20094;
+  background-image: linear-gradient(to bottom, #d20094 60%, #900080 100%);
 }
 
 #btnNextQuestion {
@@ -167,12 +223,17 @@ svg circle {
 
 #questionNumbers {
   letter-spacing: 0.5px;
+  font-weight: 500;
   text-transform: uppercase;
+  margin-top: 30px;
 }
-
+.numeretto {
+  color: #d20094;
+  font-size: 17px;
+}
 .btnGroupAnswersJS {
-  background-color: #cb2376;
-  background-image: linear-gradient(to bottom, #cb2376 60%, #ff359aac 100%);
+  background-color: #d20094;
+  background-image: linear-gradient(to bottom, #d20094 60%, #900080 100%);
 }
 
 #lastItem {
@@ -183,7 +244,7 @@ svg circle {
 #resultsTitle h1 {
   text-align: center;
   line-height: 1%;
-  font-size: 3rem;
+  font-size: 60px;
   font-weight: 700;
 }
 #resultsTitle h4 {
@@ -221,9 +282,22 @@ svg circle {
   margin-top: 0;
   padding-top: 0;
 }
-.graphic {
-  width: 45%;
+
+.wrapper {
+  max-width: 100%;
+  margin-left: 5em;
+  margin-right: 5em;
+  align-content: center;
+  position: relative;
 }
+
+canvas {
+  background: transparent;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+
 #resultsQuestions {
   width: 100%;
   margin: 30px 10px 30px 10px;
@@ -238,6 +312,16 @@ svg circle {
   margin-top: 0;
   font-weight: 200;
 }
+
+#percentRight {
+  color: #00ffff;
+  margin: 0;
+}
+
+#percentWrong {
+  color: #d20094;
+}
+
 #lastButtons {
   position: relative;
   color: white;
@@ -266,37 +350,48 @@ svg circle {
   padding: 18px 30px;
   cursor: pointer;
 }
-#reviewTitle h2 {
+
+#innerSign {
+  position: absolute;
+  top: 62px;
+  right: 60px;
+  font-size: 20px;
+}
+
+#reviewTitle h1 {
   text-align: center;
-  font-size: 3.2rem;
-  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 60px;
+  margin-bottom: 10px;
 }
 #reviewTitle p {
   text-align: center;
-  font-size: 1.2rem;
-  margin-top: 5px;
+  margin-top: 30px;
 }
 #rateStars {
   text-align: center;
-  padding: 50px;
   align-items: center;
   justify-content: center;
-  height: 8px;
-  font-size: 1.5em;
-  color: #0b113b;
-  gap: 2px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-#ratestars i {
-  transition: 0.25s ease;
+.star {
+  width: 30px;
+  height: 30px;
+  padding: 3px;
   cursor: pointer;
+  transition: opacity 0.2s ease;
+  opacity: 0.5;
 }
-
-#ratestars.selected {
-  color: #00fefe;
-  text-shadow: #00fefe 1px 0 10px;
+.star.hovered {
+  opacity: 1;
+  color: #00ffff;
 }
-
+.star.selected {
+  opacity: 1;
+  color: #00ffff;
+}
 #leaveAComment {
   text-align: center;
   font-size: 1.2rem;
@@ -306,8 +401,15 @@ svg circle {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid rgb(189, 8, 134);
+  margin-top: 20px;
   margin-bottom: 40px;
+  font-size: 1em;
 }
+
+#reviewText:focus {
+  outline: none;
+}
+
 #moreInfo {
   color: #0b113b;
   background-color: #00ffff;
