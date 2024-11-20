@@ -6,7 +6,6 @@ const percentRight = document.getElementById("percentRight");
 const percentWrong = document.getElementById("percentWrong");
 const numbersCorrect = document.getElementById("numbersCorrect");
 const numbersWrong = document.getElementById("numbersWrong");
-const innerSign = document.getElementById("innerSign");
 const mex = document.getElementById("mex");
 const mailSend = document.getElementById("mailSend");
 percentRight.innerHTML = `<span id="percentRight">${
@@ -19,12 +18,10 @@ numbersCorrect.innerText = `${correctAnswers}/10`;
 numbersWrong.innerText = `${10 - correctAnswers}/10`;
 
 if (correctAnswers >= 6) {
-  mex.innerHTML = `✔️ <span style="color: #00FFFF">Congratulations! You passed the exam.</span>`;
-  innerSign.innerText = "";
+  mex.innerHTML = `<span style="color: #00FFFF">Congratulations!<br/>You passed the exam.</span>`;
 } else {
-  mex.innerText = "❌ Sorry! You didn't pass the exam.";
+  mex.innerHTML = `<span style="font-size: 30px">Sorry!</span><br/><br/><span style="font-weight: normal">You didn't pass the exam.</span>`;
   mailSend.style.display = "none";
-  innerSign.innerText = "";
 }
 
 const myChartsCanvas = document.getElementById("myCharts");
@@ -43,6 +40,7 @@ const donutChart = new Chart(myChartsCanvas, {
     ],
   },
   options: {
+    cutout: "80%",
     plugins: {
       legend: {
         display: false,
@@ -77,7 +75,6 @@ btnShowAnswers.addEventListener("mouseleave", () => {
 btnRateUs.addEventListener("mouseover", () => {
   btnRateUs.classList.toggle("btnGroupAnswersJS");
 });
-
 btnRateUs.addEventListener("mouseleave", () => {
   btnRateUs.classList.toggle("btnGroupAnswersJS");
 });

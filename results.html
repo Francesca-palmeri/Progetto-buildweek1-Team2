@@ -26,27 +26,29 @@
           <h4>The summary of your answers:</h4>
         </div>
         <div id="answersChart">
-          <div>
+          <div id="correctBlock">
             <h2>Correct <br /><span id="percentRight">66.7%</span></h2>
             <p><span id="numbersCorrect">4/6</span> questions</p>
           </div>
           <!--grafico-->
           <div class="wrapper">
-            <div id="innerSign">CIAO</div>
+            <div id="resultsQuestions">
+              <h4 id="mex">
+                Congratulations! <span> You passed the exam.</span>
+              </h4>
+              <p id="mailSend">
+                We'll send you the certificate in few minutes.Check your email
+                (including promotions / span folder)
+              </p>
+            </div>
             <canvas id="myCharts"></canvas>
           </div>
-          <div>
+          <div id="wrongBlock">
             <h2>&nbsp;Wrong<br /><span id="percentWrong">66.7%</span></h2>
             <p>&nbsp; &nbsp; <span id="numbersWrong">4/6</span> questions</p>
           </div>
         </div>
-        <div id="resultsQuestions">
-          <h4 id="mex">Congratulations! <span> You passed the exam.</span></h4>
-          <p id="mailSend">
-            We'll send you the certificate in few minutes.Check your email
-            (including promotions / span folder)
-          </p>
-        </div>
+
         <div id="lastButtons">
           <button id="btnShowAnswers">SHOW ANSWERS</button>
           <button id="btnRateUs">RATE US</button>

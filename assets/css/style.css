@@ -252,6 +252,7 @@ svg circle {
   font-size: 1.2rem;
   font-weight: 400;
   word-spacing: 0.5px;
+  margin-bottom: 60px;
 }
 #answersChart {
   text-align: center;
@@ -259,6 +260,7 @@ svg circle {
 #answersChart div {
   display: inline-block;
   text-align: center;
+  padding: 0;
   height: 150px;
 }
 #answersChart h2 {
@@ -284,34 +286,53 @@ svg circle {
 }
 
 .wrapper {
-  max-width: 100%;
-  min-width: 50%; /*cercare di fissare i laterali*/
+  margin: 0 auto;
   margin-left: 5em;
   margin-right: 5em;
   align-content: center;
+  width: 18em;
+  min-height: 20em;
   position: relative;
 }
 
 canvas {
-  background: transparent;
-  margin: 0 auto;
   height: 100%;
   width: 100%;
+  display: block;
+}
+
+#correctBlock {
+  vertical-align: top;
+  margin-top: 50px;
+  margin-right: 60px;
+}
+
+#wrongBlock {
+  vertical-align: top;
+  margin-top: 50px;
+  margin-left: 60px;
 }
 
 #resultsQuestions {
+  position: absolute;
   width: 100%;
   margin: 30px 10px 30px 10px;
   text-align: center;
+  left: -10px;
+  top: 80px;
 }
 #resultsQuestions h4 {
-  margin-bottom: 0;
-  font-size: 1.2rem;
-  word-spacing: 0.6px;
+  text-align: center;
+  margin: 0;
+  padding: 0 60px 0 60px;
+  font-size: 16px;
+  word-spacing: 0.2px;
 }
 #resultsQuestions p {
-  margin-top: 15px;
-  font-weight: 200;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  padding: 0 50px 0 50px;
 }
 
 #percentRight {
