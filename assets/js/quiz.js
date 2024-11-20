@@ -135,7 +135,7 @@ btnNextQuestion.addEventListener(
 
 btnNextQuestion.addEventListener(
   "mouseleave",
-  () => (btnNextQuestion.style.boxShadow = "0px 0px 10px 4px #00ffff")
+  () => (btnNextQuestion.style.boxShadow = "0px 0px 18px 6px #00ffff")
 );
 
 let verifiedAnswers = 0;

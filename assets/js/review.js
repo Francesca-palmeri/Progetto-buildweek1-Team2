@@ -1,7 +1,9 @@
 const stars = document.querySelectorAll(".star");
 const btnMoreInfo = document.getElementById("moreInfo");
+const advice = document.getElementById("advice");
 let isClicked = false;
 let starIndex = 0;
+let pickedRate = 0;
 
 stars.forEach((star) => {
   star.addEventListener("mouseenter", function () {
@@ -25,12 +27,13 @@ stars.forEach((star) => {
 stars.forEach((star) => {
   star.addEventListener("click", function () {
     isClicked = true;
-    btnMoreInfo.disabled = false;
+    pickedRate = star.id;
+    advice.style.visibility = "hidden";
     stars.forEach((starArr) => {
       if (isClicked) {
         starArr.classList.remove("selected");
       }
-      if (!(starArr.id > starIndex)) {
+      if (!(parseInt(starArr.id) > starIndex)) {
         starArr.classList.add("selected");
       }
     });
@@ -44,97 +47,14 @@ btnMoreInfo.addEventListener(
 
 btnMoreInfo.addEventListener(
   "mouseleave",
-  () => (btnMoreInfo.style.boxShadow = "0px 0px 10px 4px #00ffff")
+  () => (btnMoreInfo.style.boxShadow = "0px 0px 18px 6px #00ffff")
 );
 
 btnMoreInfo.addEventListener("click", function () {
   if (isClicked) {
+    alert(`Your feedback is ${pickedRate}⭐. Thank you!`);
     window.location.href = "https://epicode.com/it/";
+  } else {
+    advice.style.visibility = "visible";
   }
 });
-
-/*
-const star1 = document.getElementById("1");
-star1.addEventListener("mouseenter", function () {
-  starIndex = 1;
-  star1.classList.toggle("hovered");
-});
-const star2 = document.getElementById("2");
-star2.addEventListener("mouseenter", function () {
-  starIndex = 2;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star3 = document.getElementById("3");
-star3.addEventListener("mouseenter", function () {
-  starIndex = 3;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star4 = document.getElementById("4");
-star4.addEventListener("mouseenter", function () {
-  starIndex = 4;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star5 = document.getElementById("5");
-star5.addEventListener("mouseenter", function () {
-  starIndex = 5;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star6 = document.getElementById("6");
-star6.addEventListener("mouseenter", function () {
-  starIndex = 6;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star7 = document.getElementById("7");
-star7.addEventListener("mouseenter", function () {
-  starIndex = 7;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star8 = document.getElementById("8");
-star8.addEventListener("mouseenter", function () {
-  starIndex = 8;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star9 = document.getElementById("9");
-star9.addEventListener("mouseenter", function () {
-  starIndex = 9;
-  stars.forEach((star) => {
-    if (!(star.id > starIndex)) {
-      star.classList.toggle("hovered");
-    }
-  });
-});
-const star10 = document.getElementById("10");
-star10.addEventListener("mouseenter", function () {
-  starIndex = 10;
-  stars.forEach((star) => {
-    star.classList.toggle("hovered");
-  });
-});*/
