@@ -226,8 +226,10 @@ function proceedToNextQuestion() {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
       let answerTextVar = btnArr[indexWrongOrNotClicked].innerText;
+      let correctAnswerVar = questions[questionIndex].correct_answer;
       newObj.questionTitle = questionTitleVar;
       newObj.answerText = answerTextVar;
+      newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
       console.log("SBAGLIATA:");
       console.log(wrongObj);
@@ -235,18 +237,24 @@ function proceedToNextQuestion() {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
       let answerTextVar = "❌";
+      let correctAnswerVar = questions[questionIndex].correct_answer;
       newObj.questionTitle = questionTitleVar;
       newObj.answerText = answerTextVar;
+      newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
       console.log("SBAGLIATA:");
       console.log(wrongObj);
     }
     let storeVerifiedAnswers = verifiedAnswers;
     localStorage.setItem("correctAnswers", storeVerifiedAnswers); //con localStorage salvo il numero delle domande corrette
+    let storeCorrectArr = JSON.stringify(correctObj);
+    let storeWrongArr = JSON.stringify(wrongObj);
+    localStorage.setItem("correctArr", storeCorrectArr);
+    localStorage.setItem("wrongArr", storeWrongArr);
     window.location.replace("results.html"); //rimando l'utende alla terza pagina results e faccio in modo con replace che non possa tornare alla pagina dei quiz, ma alla home
   } else {
     //in tutti i casi che non siano il 9 aggiorno l'index
-    //verifica che la ripsosta cliccata sia la giusta
+    //verifica che la risposta cliccata sia la giusta
     if (verifyAnswer()) {
       //se verifyAnswer ritorna true, inizializza un nuovo oggetto che contiene domande e risposte giuste
       const newObj = {}; //se in console non stampa nulla, la risposta è sbagliata
@@ -261,8 +269,10 @@ function proceedToNextQuestion() {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
       let answerTextVar = btnArr[indexWrongOrNotClicked].innerText;
+      let correctAnswerVar = questions[questionIndex].correct_answer;
       newObj.questionTitle = questionTitleVar;
       newObj.answerText = answerTextVar;
+      newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
       console.log("SBAGLIATA:");
       console.log(wrongObj);
@@ -270,8 +280,10 @@ function proceedToNextQuestion() {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
       let answerTextVar = "❌";
+      let correctAnswerVar = questions[questionIndex].correct_answer;
       newObj.questionTitle = questionTitleVar;
       newObj.answerText = answerTextVar;
+      newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
       console.log("SBAGLIATA:");
       console.log(wrongObj);

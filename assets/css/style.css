@@ -349,9 +349,15 @@ canvas {
   color: white;
 }
 
-#ulDiv {
-  margin-top: 80px;
-  padding-left: 60px;
+#ulCorrectDiv {
+  margin-top: 100px;
+  padding: 30px;
+  border-bottom: 2px solid white;
+}
+
+#ulWrongDiv {
+  margin-top: 20px;
+  padding: 30px;
 }
 
 #btnShowAnswers {
@@ -446,4 +452,25 @@ canvas {
   border: none;
   cursor: pointer;
   float: inline-end;
+}
+
+#correctLi::before {
+  content: "✔️";
+  background: transparent;
+  border-radius: 1ch;
+  padding-inline: 1ch;
+  margin-inline-end: 1ch;
+}
+
+#wrongLi::before {
+  content: "❌";
+  background: transparent;
+  border-radius: 1ch;
+  padding-inline: 1ch;
+  margin-inline-end: 1ch;
+}
+
+#correctLi,
+#wrongLi {
+  list-style-type: none;
 }

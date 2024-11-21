@@ -1,6 +1,14 @@
 let correctAnswers = localStorage.getItem("correctAnswers");
+let correctArrStr = localStorage.getItem("correctArr");
+let wrongArrStr = localStorage.getItem("wrongArr");
+let correctArrObj = JSON.parse(correctArrStr);
+let wrongArrObj = JSON.parse(wrongArrStr);
 
-window.addEventListener("load", function () {});
+window.addEventListener("load", function () {
+  console.log(correctArrObj);
+  console.log(wrongArrObj);
+  printBothList();
+});
 
 const percentRight = document.getElementById("percentRight");
 const percentWrong = document.getElementById("percentWrong");
@@ -56,11 +64,21 @@ btnRateUs.addEventListener("click", function () {
 
 let btnShowAnswers = document.getElementById("btnShowAnswers");
 let answersUl = document.getElementById("answersUl");
+let wrongUl = document.getElementById("wrongUl");
+let correctHead = document.getElementById("correctHead");
+let wrongHead = document.getElementById("wrongHead");
+let ulCorrectDiv = document.getElementById("ulCorrectDiv");
+let ulWrongDiv = document.getElementById("ulWrongDiv");
 btnShowAnswers.addEventListener("click", function () {
-  if (answersUl.style.visibility === "hidden") {
-    answersUl.style.visibility = "visible";
+  if (
+    ulCorrectDiv.style.visibility === "hidden" &&
+    ulWrongDiv.style.visibility === "hidden"
+  ) {
+    ulCorrectDiv.style.visibility = "visible";
+    ulWrongDiv.style.visibility = "visible";
   } else {
-    answersUl.style.visibility = "hidden";
+    ulCorrectDiv.style.visibility = "hidden";
+    ulWrongDiv.style.visibility = "hidden";
   }
 });
 
@@ -78,3 +96,48 @@ btnRateUs.addEventListener("mouseover", () => {
 btnRateUs.addEventListener("mouseleave", () => {
   btnRateUs.classList.toggle("btnGroupAnswersJS");
 });
+
+function printBothList() {
+  for (let i = 0; i < correctArrObj.length; i++) {
+    const newLi = document.createElement("li");
+    newLi.innerText = correctArrObj[i].questionTitle;
+    answersUl.appendChild(newLi);
+
+    const newUl = document.createElement("ul");
+    newLi.appendChild(newUl);
+
+    const newLi2 = document.createElement("li");
+    newLi2.innerText = correctArrObj[i].answerText;
+    newUl.appendChild(newLi2);
+    newLi2.id = "correctLi";
+    newLi2.style.color = "#00ffff";
+  }
+  const newHead = document.createElement("h2");
+  newHead.innerText = "Correct answers: ";
+  correctHead.appendChild(newHead);
+
+  for (let i = 0; i < wrongArrObj.length; i++) {
+    const newLi = document.createElement("li");
+    newLi.innerText = wrongArrObj[i].questionTitle;
+    wrongUl.appendChild(newLi);
+
+    const newUl = document.createElement("ul");
+    newLi.appendChild(newUl);
+
+    const newLi2 = document.createElement("li");
+    newLi2.innerText = wrongArrObj[i].answerText;
+    newUl.appendChild(newLi2);
+    newLi2.style.color = "#d20094";
+    newLi2.id = "wrongLi";
+
+    const newLi3 = document.createElement("li");
+    newLi3.innerText = wrongArrObj[i].correctAnswer;
+    newUl.appendChild(newLi3);
+    newLi3.style.color = "#00ffff";
+    newLi3.id = "correctLi";
+  }
+
+  const newHead2 = document.createElement("h2");
+  newHead2.innerText = "Wrong answers: ";
+  wrongHead.appendChild(newHead2);
+}
