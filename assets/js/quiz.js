@@ -93,6 +93,10 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
+//due oggetti vuoti (array di oggetti) che serviranno per il local Storage
+const correctObj = []; //domande e risposte giuste
+
+const wrongObj = []; //domande e risposte sbagliate
 
 const timerNumber = document.getElementById("counterTimer");
 const circle = document.getElementById("circle");
@@ -164,6 +168,10 @@ function wrongClicked() {
   varWrongClicked = true;
   return true;
 }
+
+let indexWrongOrNotClicked;
+function wrongOrNotClicked() {}
+
 btnAnswer1.addEventListener("click", function () {
   if (wrongClicked()) {
     //se wrongClicked ritorna true, vuol dire che ho cliccato il pulsante sbagliato
@@ -171,6 +179,7 @@ btnAnswer1.addEventListener("click", function () {
     btnAnswer2.classList.remove("btnGroupAnswersJS");
     btnAnswer3.classList.remove("btnGroupAnswersJS");
     btnAnswer4.classList.remove("btnGroupAnswersJS");
+    indexWrongOrNotClicked = 0;
   }
 });
 btnAnswer2.addEventListener("click", function () {
@@ -179,6 +188,7 @@ btnAnswer2.addEventListener("click", function () {
     btnAnswer1.classList.remove("btnGroupAnswersJS");
     btnAnswer3.classList.remove("btnGroupAnswersJS");
     btnAnswer4.classList.remove("btnGroupAnswersJS");
+    indexWrongOrNotClicked = 1;
   }
 });
 btnAnswer3.addEventListener("click", function () {
@@ -187,6 +197,7 @@ btnAnswer3.addEventListener("click", function () {
     btnAnswer2.classList.remove("btnGroupAnswersJS");
     btnAnswer1.classList.remove("btnGroupAnswersJS");
     btnAnswer4.classList.remove("btnGroupAnswersJS");
+    indexWrongOrNotClicked = 2;
   }
 });
 btnAnswer4.addEventListener("click", function () {
@@ -195,6 +206,7 @@ btnAnswer4.addEventListener("click", function () {
     btnAnswer2.classList.remove("btnGroupAnswersJS");
     btnAnswer1.classList.remove("btnGroupAnswersJS");
     btnAnswer3.classList.remove("btnGroupAnswersJS");
+    indexWrongOrNotClicked = 3;
   }
 });
 
@@ -203,14 +215,70 @@ function proceedToNextQuestion() {
   //scala da domanda a domanda
   if (questionIndex === 9) {
     //prende l'indice delle domande dall'array, se arriva a 9 l'utente ha terminato
-    verifyAnswer(); //verifica se l'utente ha selezionato la risposta giusta. qui arriviamo all'ultima
+    if (verifyAnswer()) {
+      //verifica se l'utente ha selezionato la risposta giusta. qui arriviamo all'ultima
+      const newObj = { ...correctObj };
+      let questionTitleVar = questions[questionIndex].question;
+      let answerTextVar = questions[questionIndex].correct_answer;
+      newObj.questionTitle = questionTitleVar;
+      newObj.answerText = answerTextVar;
+      correctObj.push(newObj);
+      console.log(correctObj);
+    } else if (varWrongClicked) {
+      const newObj = {};
+      let questionTitleVar = questions[questionIndex].question;
+      let answerTextVar = btnArr[indexWrongOrNotClicked].innerText;
+      newObj.questionTitle = questionTitleVar;
+      newObj.answerText = answerTextVar;
+      wrongObj.push(newObj);
+      console.log("SBAGLIATA:");
+      console.log(wrongObj);
+    } else if (varCorrClicked === false && varWrongClicked === false) {
+      const newObj = {};
+      let questionTitleVar = questions[questionIndex].question;
+      let answerTextVar = "❌";
+      newObj.questionTitle = questionTitleVar;
+      newObj.answerText = answerTextVar;
+      wrongObj.push(newObj);
+      console.log("SBAGLIATA:");
+      console.log(wrongObj);
+    }
     let storeVerifiedAnswers = verifiedAnswers;
     localStorage.setItem("correctAnswers", storeVerifiedAnswers); //con localStorage salvo il numero delle domande corrette
     window.location.replace("results.html"); //rimando l'utende alla terza pagina results e faccio in modo con replace che non possa tornare alla pagina dei quiz, ma alla home
   } else {
     //in tutti i casi che non siano il 9 aggiorno l'index
+    //verifica che la ripsosta cliccata sia la giusta
+    if (verifyAnswer()) {
+      //se verifyAnswer ritorna true, inizializza un nuovo oggetto che contiene domande e risposte giuste
+      const newObj = {}; //se in console non stampa nulla, la risposta è sbagliata
+      let questionTitleVar = questions[questionIndex].question;
+      let answerTextVar = questions[questionIndex].correct_answer;
+      newObj.questionTitle = questionTitleVar;
+      newObj.answerText = answerTextVar;
+      correctObj.push(newObj);
+      console.log("CORRETTA:");
+      console.log(correctObj);
+    } else if (varWrongClicked) {
+      const newObj = {};
+      let questionTitleVar = questions[questionIndex].question;
+      let answerTextVar = btnArr[indexWrongOrNotClicked].innerText;
+      newObj.questionTitle = questionTitleVar;
+      newObj.answerText = answerTextVar;
+      wrongObj.push(newObj);
+      console.log("SBAGLIATA:");
+      console.log(wrongObj);
+    } else if (varCorrClicked === false && varWrongClicked === false) {
+      const newObj = {};
+      let questionTitleVar = questions[questionIndex].question;
+      let answerTextVar = "❌";
+      newObj.questionTitle = questionTitleVar;
+      newObj.answerText = answerTextVar;
+      wrongObj.push(newObj);
+      console.log("SBAGLIATA:");
+      console.log(wrongObj);
+    }
     questionIndex++;
-    verifyAnswer(); //verifica che la ripsosta cliccata sia la giusta
     printQuestionAndAnswers(); //ristampa la domanda ripartendo dai case aggiornati perche con ++ ho aggiornato l'index
   }
 }
@@ -219,6 +287,9 @@ function verifyAnswer() {
   if (varCorrClicked) {
     //funzione che tiene il conto delle domande corrette. a ogni risposta cliccata incrementa di uno, solo se la risposta è corretta ovviamente
     verifiedAnswers++;
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -232,6 +303,8 @@ let highlightCorrectIndex = 0;
 let highlightWrongIndex = 0;
 
 function printQuestionAndAnswers() {
+  varCorrClicked = false;
+  varWrongClicked = false;
   //funzione che stampa il testo della domanda
   questionNumbers.innerHTML = `Question ${
     //aggiorna il numero question x/10.
