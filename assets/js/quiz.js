@@ -96,21 +96,24 @@ const questions = [
 
 const timerNumber = document.getElementById("counterTimer");
 const circle = document.getElementById("circle");
-const totalDashOffset = 314;
+const totalDashOffset = 314; //variabile contenente i pixel totali del cerchio
 
 let countdown;
 function Timer(questionType) {
-  let timer = questionType === "boolean" ? 30 : 45;
+  //parte la funzione timer che prende come parametro il type della domanda (boolean o multiple)
+  let timer = questionType === "boolean" ? 30 : 45; //se il type della domanda è boolean parte da 30, altrimenti 45. operatore ternario
   const initialTime = timer;
-  timerNumber.textContent = `${timer}`;
+  timerNumber.textContent = `${timer}`; //cambio il "testo" del timer recuperando il valore dalla variabile precedentemente definita
   countdown = setInterval(() => {
-    timer--;
-    timerNumber.textContent = `${timer}`;
-    circle.style.strokeDashoffset = totalDashOffset * (1 - timer / initialTime);
+    //parte il timer. setInterval prende due parametri; il primo è una funzione freccia, il secondo è 1000
+    timer--; //1000 indica che la funzione freccia deve essere ripetuta ogni 1000ms quindi 1 secondo. timer-- decrementa i secondi
+    timerNumber.textContent = `${timer}`; //aggiorna il testo ogni secondo
+    circle.style.strokeDashoffset = totalDashOffset * (1 - timer / initialTime); //gestisce l'animazione del cerchio. richiamando la classe css, facciamo un calcolo che calcola i pixel da rimuovere dal cerchio ad ogni secondo che passa
     if (timer <= -1) {
+      //quando il timer arriva a 0, resetta l'intervallo e procede alla domanda successiva
       timerNumber.textContent = "0";
       clearInterval(countdown);
-      proceedToNextQuestion();
+      proceedToNextQuestion(); //funzione importante per gestire le domande successive
     }
   }, 1000);
 }
@@ -144,25 +147,27 @@ let questionIndex = 0;
 window.addEventListener("load", init);
 
 function init() {
+  //al caricamento della pagina stampa le domande (una alla volta)
   printQuestionAndAnswers();
 }
 
 function correctClicked() {
-  btnNextQuestion.disabled = false;
-  varCorrClicked = true;
+  btnNextQuestion.disabled = false; //riaabilito il pulsante procedi appena clicco una risposta (in questo caso è quella giusta)
+  varCorrClicked = true; //imposta la variabile a true se clicco pulsante giusto
   varWrongClicked = false;
-  btnArr[highlightCorrectIndex].classList.add("btnGroupAnswersJS");
+  btnArr[highlightCorrectIndex].classList.add("btnGroupAnswersJS"); //assegna la classe del gradiente al pulsante selezionato
 }
 
 function wrongClicked() {
-  btnNextQuestion.disabled = false;
-  varCorrClicked = false;
+  btnNextQuestion.disabled = false; //abilita il pulsante procedi
+  varCorrClicked = false; //aggiorna il pulsante a false
   varWrongClicked = true;
   return true;
 }
 btnAnswer1.addEventListener("click", function () {
   if (wrongClicked()) {
-    btnAnswer1.classList.add("btnGroupAnswersJS");
+    //se wrongClicked ritorna true, vuol dire che ho cliccato il pulsante sbagliato
+    btnAnswer1.classList.add("btnGroupAnswersJS"); //assegna il gradiente al pulsante selezionato e lo toglie agli altri
     btnAnswer2.classList.remove("btnGroupAnswersJS");
     btnAnswer3.classList.remove("btnGroupAnswersJS");
     btnAnswer4.classList.remove("btnGroupAnswersJS");
@@ -193,24 +198,27 @@ btnAnswer4.addEventListener("click", function () {
   }
 });
 
-btnNextQuestion.addEventListener("click", proceedToNextQuestion);
+btnNextQuestion.addEventListener("click", proceedToNextQuestion); //listener click al bottone procedi
 function proceedToNextQuestion() {
+  //scala da domanda a domanda
   if (questionIndex === 9) {
-    verifyAnswer();
+    //prende l'indice delle domande dall'array, se arriva a 9 l'utente ha terminato
+    verifyAnswer(); //verifica se l'utente ha selezionato la risposta giusta. qui arriviamo all'ultima
     let storeVerifiedAnswers = verifiedAnswers;
-    localStorage.setItem("correctAnswers", storeVerifiedAnswers);
-    window.location.replace("results.html");
+    localStorage.setItem("correctAnswers", storeVerifiedAnswers); //con localStorage salvo il numero delle domande corrette
+    window.location.replace("results.html"); //rimando l'utende alla terza pagina results e faccio in modo con replace che non possa tornare alla pagina dei quiz, ma alla home
   } else {
+    //in tutti i casi che non siano il 9 aggiorno l'index
     questionIndex++;
-    verifyAnswer();
-    printQuestionAndAnswers();
+    verifyAnswer(); //verifica che la ripsosta cliccata sia la giusta
+    printQuestionAndAnswers(); //ristampa la domanda ripartendo dai case aggiornati perche con ++ ho aggiornato l'index
   }
 }
 
 function verifyAnswer() {
   if (varCorrClicked) {
+    //funzione che tiene il conto delle domande corrette. a ogni risposta cliccata incrementa di uno, solo se la risposta è corretta ovviamente
     verifiedAnswers++;
-    console.log(verifiedAnswers);
   }
 }
 
@@ -224,33 +232,39 @@ let highlightCorrectIndex = 0;
 let highlightWrongIndex = 0;
 
 function printQuestionAndAnswers() {
+  //funzione che stampa il testo della domanda
   questionNumbers.innerHTML = `Question ${
-    questionIndex + 1
+    //aggiorna il numero question x/10.
+    questionIndex + 1 //inseriamo innerHTML per gestire il tag html span
   }<span class="numeretto"> / 10</span>`;
-  btnAnswer1.removeEventListener("click", correctClicked);
-  btnAnswer2.removeEventListener("click", correctClicked);
+  btnAnswer1.removeEventListener("click", correctClicked); //rimuovo i listener inseriti nello switch all'inizializzazione della pagina
+  btnAnswer2.removeEventListener("click", correctClicked); //perchè non conosco la posizione della domanda corretta (che è randomizzata)
   btnAnswer3.removeEventListener("click", correctClicked);
   btnAnswer4.removeEventListener("click", correctClicked);
   btnAnswer1.removeEventListener("click", wrongClicked);
   btnAnswer2.removeEventListener("click", wrongClicked);
   btnAnswer3.removeEventListener("click", wrongClicked);
   btnAnswer4.removeEventListener("click", wrongClicked);
-  btnAnswer1.classList.remove("btnGroupAnswersJS");
+  btnAnswer1.classList.remove("btnGroupAnswersJS"); //questi 4 reset rimuovono la classe css che assegna il gradiente al botton quando seleziono la risposta
   btnAnswer2.classList.remove("btnGroupAnswersJS");
   btnAnswer3.classList.remove("btnGroupAnswersJS");
   btnAnswer4.classList.remove("btnGroupAnswersJS");
-  btnNextQuestion.disabled = true;
-  clearInterval(countdown);
-  Timer(questions[questionIndex].type);
-  switch (questionIndex) {
+  btnNextQuestion.disabled = true; //disabilita il bottone per procedere alla domanda successiva. non posso procedere se non seleziono una risposta
+  clearInterval(countdown); //gestione timer. clearInterval resetta il countdown e lo fa andare a zero
+  Timer(questions[questionIndex].type); //il timer riparte, legge il tipo della domanda dall'array; se multiple conterà 45secondi, se boolean ne conta 30
+  switch (
+    questionIndex //questo switch contiene gli altri switch al suo interno
+  ) {
     case 0:
-      questionHead.innerText = questions[questionIndex].question;
-      ranNum = Math.floor(Math.random() * 4);
+      questionHead.innerText = questions[questionIndex].question; //prendo il testo della domanda
+      ranNum = Math.floor(Math.random() * 4); //genero il numero casuale della posizione del bottone della risposta corretta
 
-      switch (ranNum) {
+      switch (
+        ranNum // questo switch gestisce la posizione della risposta corretta
+      ) {
         case 0:
-          btnAnswer1.innerText = questions[questionIndex].correct_answer;
-          btnAnswer1.addEventListener("click", correctClicked);
+          btnAnswer1.innerText = questions[questionIndex].correct_answer; //gestione della risposta corretta
+          btnAnswer1.addEventListener("click", correctClicked); //case 0= la risposta corretta appare al primo bottone e così via
           highlightCorrectIndex = 0;
           break;
         case 1:
@@ -269,17 +283,19 @@ function printQuestionAndAnswers() {
           highlightCorrectIndex = 3;
           break;
       }
-
-      incorrectIndex = 0;
+      //riprendo la gestione della domanda.
+      incorrectIndex = 0; //variabile che mi permette di gestire l'indice delle risposte sbagliate. parte da 0 e da qui "parte" il for che fa 4 iterazioni ma "salta" la risposta corretta tramite l'if (3 iterazioni nella pratica)
       for (let i = 0; i < 4; i++) {
+        //con il ciclo for prendo il numero dei bottoni (4) e gestisco le risposte sbagliate
         if (i !== ranNum) {
-          btnArr[i].innerText =
-            questions[questionIndex].incorrect_answers[incorrectIndex];
-          btnArr[i].addEventListener("click", wrongClicked);
-          incorrectIndex++;
-        }
+          //se l'i è diversa dal numero casuale della risposta corretta, salto l'iterazione
+          btnArr[i].innerText = //ho un array che contiene tutti e 4 i bottoni. if mi permette di non "pescare" con il for il bottone in cui è posizionata la risposta corretta
+            questions[questionIndex].incorrect_answers[incorrectIndex]; //pesco l'indice della risposta sbagliata e la sua stringa, con innerText inserisco nel bottone la risposta sbagliata
+          btnArr[i].addEventListener("click", wrongClicked); //preso il bottone della risposta sbagliata, assegno un event click diverso da correctClicked(che è una funzione)
+          incorrectIndex++; //con ++ incremento l'indice della risposta sbagliata. incorrect_answers, che contiene le risposte sbagliate nell'array, è un array a sua volta quindi qui seleziono il suo indice.
+        } //incorrectIndex può arrivare a selezionare massimo 3 elementi, che è il massimo degli elementi all'interno dell'array incorrect_answers
       }
-      break;
+      break; //fine gestione della prima domanda, incluso lo switch interno per la risposta corretta
     case 1:
       questionHead.innerText = questions[questionIndex].question;
       ranNum = Math.floor(Math.random() * 4);
@@ -315,14 +331,16 @@ function printQuestionAndAnswers() {
           incorrectIndex++;
         }
       }
-      break;
+      break; //troviamo il primo caso boolean
     case 2:
-      btnAnswer3.style.visibility = "hidden";
+      btnAnswer3.style.visibility = "hidden"; //per prima cosa, nasconde gli ultimi due bottoni (me ne servono solo 2)
       btnAnswer4.style.visibility = "hidden";
-      questionHead.innerText = questions[questionIndex].question;
-      ranNum = Math.floor(Math.random() * 2);
+      questionHead.innerText = questions[questionIndex].question; //prendo il titolo della domanda con questionIndex
+      ranNum = Math.floor(Math.random() * 2); //genero nuovamente il numero casuale che viene moltiplicato per 2 invece che per 4 (mi servono solo gli indici 0 e 1 quindi due valori)
 
-      switch (ranNum) {
+      switch (
+        ranNum //gestisce la risposta corretta
+      ) {
         case 0:
           btnAnswer1.innerText = questions[questionIndex].correct_answer;
           btnAnswer1.addEventListener("click", correctClicked);
@@ -336,14 +354,16 @@ function printQuestionAndAnswers() {
       }
       incorrectIndex = 0;
       for (let i = 0; i < 2; i++) {
+        //stessa logica del for precedente ma che arriva fino a massimo 2 iterazioni (0 e 1)
         if (i !== ranNum) {
+          //if esclude la risposta corretta e inserisce quella sbagliata nell'altro bottone
           btnArr[i].innerText =
             questions[questionIndex].incorrect_answers[incorrectIndex];
           btnArr[i].addEventListener("click", wrongClicked);
-          incorrectIndex++;
+          incorrectIndex++; //l'indice qua si incrementa fino a 1 (0 e 1)
         }
       }
-      break;
+      break; //esce dalla funzione
     case 3:
       btnAnswer3.style.visibility = "hidden";
       btnAnswer4.style.visibility = "hidden";
