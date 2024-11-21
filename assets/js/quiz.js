@@ -170,8 +170,6 @@ function wrongClicked() {
 }
 
 let indexWrongOrNotClicked;
-function wrongOrNotClicked() {}
-
 btnAnswer1.addEventListener("click", function () {
   if (wrongClicked()) {
     //se wrongClicked ritorna true, vuol dire che ho cliccato il pulsante sbagliato
