@@ -57,10 +57,10 @@ btnRateUs.addEventListener("click", function () {
 let btnShowAnswers = document.getElementById("btnShowAnswers");
 let answersUl = document.getElementById("answersUl");
 btnShowAnswers.addEventListener("click", function () {
-  if (answersUl.style.display === "none") {
-    answersUl.style.display = "block";
+  if (answersUl.style.visibility === "hidden") {
+    answersUl.style.visibility = "visible";
   } else {
-    answersUl.style.display = "none";
+    answersUl.style.visibility = "hidden";
   }
 });
 

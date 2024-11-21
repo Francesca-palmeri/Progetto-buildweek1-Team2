@@ -347,12 +347,17 @@ canvas {
 #lastButtons {
   position: relative;
   color: white;
-  padding: 40px;
 }
+
+#ulDiv {
+  margin-top: 80px;
+  padding-left: 60px;
+}
+
 #btnShowAnswers {
   position: absolute;
   left: 30px;
-  margin: 20px 0 10px 0;
+  margin: 20px 0 10px 50px;
   border: 1px solid white;
   background-color: transparent;
   font-size: 15px;
@@ -363,7 +368,7 @@ canvas {
 #btnRateUs {
   position: absolute;
   right: 30px;
-  margin: 20px 0 10px 0;
+  margin: 20px 50px 10px 0;
   border: 1px solid white;
   background-color: transparent;
   font-size: 15px;
