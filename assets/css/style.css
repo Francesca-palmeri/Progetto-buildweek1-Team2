@@ -287,8 +287,8 @@ svg circle {
 
 .wrapper {
   margin: 0 auto;
-  margin-left: 5em;
-  margin-right: 5em;
+  margin-left: 1em;
+  margin-right: 1em;
   align-content: center;
   width: 18em;
   min-height: 20em;
@@ -348,7 +348,6 @@ canvas {
   position: relative;
   color: white;
   padding: 40px;
-  margin: 60px auto;
 }
 #btnShowAnswers {
   position: absolute;
