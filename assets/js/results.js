@@ -71,14 +71,14 @@ let ulCorrectDiv = document.getElementById("ulCorrectDiv");
 let ulWrongDiv = document.getElementById("ulWrongDiv");
 btnShowAnswers.addEventListener("click", function () {
   if (
-    ulCorrectDiv.style.visibility === "hidden" &&
-    ulWrongDiv.style.visibility === "hidden"
+    ulCorrectDiv.style.display === "none" &&
+    ulWrongDiv.style.display === "none"
   ) {
-    ulCorrectDiv.style.visibility = "visible";
-    ulWrongDiv.style.visibility = "visible";
+    ulCorrectDiv.style.removeProperty("display");
+    ulWrongDiv.style.removeProperty("display");
   } else {
-    ulCorrectDiv.style.visibility = "hidden";
-    ulWrongDiv.style.visibility = "hidden";
+    ulCorrectDiv.style.setProperty("display", "none");
+    ulWrongDiv.style.setProperty("display", "none");
   }
 });
 
@@ -112,9 +112,15 @@ function printBothList() {
     newLi2.id = "correctLi";
     newLi2.style.color = "#00ffff";
   }
-  const newHead = document.createElement("h2");
-  newHead.innerText = "Correct answers: ";
-  correctHead.appendChild(newHead);
+  if (correctAnswers !== "0") {
+    const newHead = document.createElement("h2");
+    newHead.innerText = "Correct answers:";
+    correctHead.appendChild(newHead);
+  } else {
+    const newHead = document.createElement("h2");
+    newHead.innerText = "Correct answers: 0";
+    correctHead.appendChild(newHead);
+  }
 
   for (let i = 0; i < wrongArrObj.length; i++) {
     const newLi = document.createElement("li");
@@ -137,7 +143,9 @@ function printBothList() {
     newLi3.id = "correctLi";
   }
 
-  const newHead2 = document.createElement("h2");
-  newHead2.innerText = "Wrong answers: ";
-  wrongHead.appendChild(newHead2);
+  if (!(wrongArrObj.length === 0)) {
+    const newHead2 = document.createElement("h2");
+    newHead2.innerText = "Wrong answers: ";
+    wrongHead.appendChild(newHead2);
+  }
 }
