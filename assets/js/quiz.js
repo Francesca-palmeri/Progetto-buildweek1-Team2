@@ -213,9 +213,9 @@ function proceedToNextQuestion() {
   //scala da domanda a domanda
   if (questionIndex === 9) {
     //prende l'indice delle domande dall'array, se arriva a 9 l'utente ha terminato
+    //verifica se l'utente ha selezionato la risposta giusta. qui arriviamo all'ultima
     if (verifyAnswer()) {
-      //verifica se l'utente ha selezionato la risposta giusta. qui arriviamo all'ultima
-      const newObj = { ...correctObj };
+      const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
       let answerTextVar = questions[questionIndex].correct_answer;
       newObj.questionTitle = questionTitleVar;
