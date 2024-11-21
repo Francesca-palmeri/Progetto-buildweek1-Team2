@@ -69,6 +69,7 @@ let correctHead = document.getElementById("correctHead");
 let wrongHead = document.getElementById("wrongHead");
 let ulCorrectDiv = document.getElementById("ulCorrectDiv");
 let ulWrongDiv = document.getElementById("ulWrongDiv");
+let downArrow = document.getElementById("downArrow");
 btnShowAnswers.addEventListener("click", function () {
   if (
     ulCorrectDiv.style.display === "none" &&
@@ -76,9 +77,11 @@ btnShowAnswers.addEventListener("click", function () {
   ) {
     ulCorrectDiv.style.removeProperty("display");
     ulWrongDiv.style.removeProperty("display");
+    downArrow.style.visibility = "visible";
   } else {
     ulCorrectDiv.style.setProperty("display", "none");
     ulWrongDiv.style.setProperty("display", "none");
+    downArrow.style.visibility = "hidden";
   }
 });
 

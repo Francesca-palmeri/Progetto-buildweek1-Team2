@@ -474,3 +474,9 @@ canvas {
 #wrongLi {
   list-style-type: none;
 }
+
+#downArrow {
+  position: absolute;
+  left: 270px;
+  top: 34px;
+}
