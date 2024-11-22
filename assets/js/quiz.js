@@ -105,13 +105,13 @@ const totalDashOffset = 314; //variabile contenente i pixel totali del cerchio
 let countdown;
 function Timer(questionType) {
   circle.style.strokeDashoffset = 0;
-  circle.style.transition = "none";
+  //  circle.style.transition = "none";
   //parte la funzione timer che prende come parametro il type della domanda (boolean o multiple)
   let timer = questionType === "boolean" ? 30 : 45; //se il type della domanda è boolean parte da 30, altrimenti 45. operatore ternario
   const initialTime = timer;
   timerNumber.textContent = `${timer}`; //cambio il "testo" del timer recuperando il valore dalla variabile precedentemente definita
   countdown = setInterval(() => {
-    circle.style.transition = "";
+    //    circle.style.transition = "";
     //parte il timer. setInterval prende due parametri; il primo è una funzione freccia, il secondo è 1000
     timer--; //1000 indica che la funzione freccia deve essere ripetuta ogni 1000ms quindi 1 secondo. timer-- decrementa i secondi
     timerNumber.textContent = `${timer}`; //aggiorna il testo ogni secondo
