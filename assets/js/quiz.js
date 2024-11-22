@@ -104,6 +104,7 @@ const totalDashOffset = 314; //variabile contenente i pixel totali del cerchio
 
 let countdown;
 function Timer(questionType) {
+  circle.style.strokeDashoffset = 0;
   //parte la funzione timer che prende come parametro il type della domanda (boolean o multiple)
   let timer = questionType === "boolean" ? 30 : 45; //se il type della domanda è boolean parte da 30, altrimenti 45. operatore ternario
   const initialTime = timer;
@@ -221,7 +222,6 @@ function proceedToNextQuestion() {
       newObj.questionTitle = questionTitleVar;
       newObj.answerText = answerTextVar;
       correctObj.push(newObj);
-      console.log(correctObj);
     } else if (varWrongClicked) {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
@@ -231,8 +231,6 @@ function proceedToNextQuestion() {
       newObj.answerText = answerTextVar;
       newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
-      console.log("SBAGLIATA:");
-      console.log(wrongObj);
     } else if (varCorrClicked === false && varWrongClicked === false) {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
@@ -242,8 +240,6 @@ function proceedToNextQuestion() {
       newObj.answerText = answerTextVar;
       newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
-      console.log("SBAGLIATA:");
-      console.log(wrongObj);
     }
     let storeVerifiedAnswers = verifiedAnswers;
     localStorage.setItem("correctAnswers", storeVerifiedAnswers); //con localStorage salvo il numero delle domande corrette
@@ -263,8 +259,6 @@ function proceedToNextQuestion() {
       newObj.questionTitle = questionTitleVar;
       newObj.answerText = answerTextVar;
       correctObj.push(newObj);
-      console.log("CORRETTA:");
-      console.log(correctObj);
     } else if (varWrongClicked) {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
@@ -274,8 +268,6 @@ function proceedToNextQuestion() {
       newObj.answerText = answerTextVar;
       newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
-      console.log("SBAGLIATA:");
-      console.log(wrongObj);
     } else if (varCorrClicked === false && varWrongClicked === false) {
       const newObj = {};
       let questionTitleVar = questions[questionIndex].question;
@@ -285,8 +277,6 @@ function proceedToNextQuestion() {
       newObj.answerText = answerTextVar;
       newObj.correctAnswer = correctAnswerVar;
       wrongObj.push(newObj);
-      console.log("SBAGLIATA:");
-      console.log(wrongObj);
     }
     questionIndex++;
     printQuestionAndAnswers(); //ristampa la domanda ripartendo dai case aggiornati perche con ++ ho aggiornato l'index

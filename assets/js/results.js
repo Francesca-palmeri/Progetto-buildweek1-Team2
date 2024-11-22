@@ -5,8 +5,6 @@ let correctArrObj = JSON.parse(correctArrStr);
 let wrongArrObj = JSON.parse(wrongArrStr);
 
 window.addEventListener("load", function () {
-  console.log(correctArrObj);
-  console.log(wrongArrObj);
   printBothList();
 });
 
