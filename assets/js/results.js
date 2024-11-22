@@ -110,8 +110,7 @@ function printBothList() {
     const newLi2 = document.createElement("li");
     newLi2.innerText = correctArrObj[i].answerText;
     newUl.appendChild(newLi2);
-    newLi2.id = "correctLi";
-    newLi2.style.color = "#00ffff";
+    newLi2.classList.add("correctLi");
   }
   if (correctAnswers !== "0") {
     const newHead = document.createElement("h2");
@@ -134,14 +133,12 @@ function printBothList() {
     const newLi2 = document.createElement("li");
     newLi2.innerText = wrongArrObj[i].answerText;
     newUl.appendChild(newLi2);
-    newLi2.style.color = "#d20094";
-    newLi2.id = "wrongLi";
+    newLi2.classList.add("wrongLi");
 
     const newLi3 = document.createElement("li");
     newLi3.innerText = wrongArrObj[i].correctAnswer;
     newUl.appendChild(newLi3);
-    newLi3.style.color = "#00ffff";
-    newLi3.id = "correctLi";
+    newLi3.classList.add("correctLi");
   }
 
   if (!(wrongArrObj.length === 0)) {

@@ -453,7 +453,7 @@ canvas {
   float: inline-end;
 }
 
-#correctLi::before {
+.correctLi::before {
   content: "✔️";
   background: transparent;
   border-radius: 1ch;
@@ -461,7 +461,7 @@ canvas {
   margin-inline-end: 1ch;
 }
 
-#wrongLi::before {
+.wrongLi::before {
   content: "❌";
   background: transparent;
   border-radius: 1ch;
@@ -469,8 +469,13 @@ canvas {
   margin-inline-end: 1ch;
 }
 
-#correctLi,
-#wrongLi {
+.correctLi {
+  color: #00ffff;
+  list-style-type: none;
+}
+
+.wrongLi {
+  color: #d20094;
   list-style-type: none;
 }
 
