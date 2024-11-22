@@ -1,19 +1,27 @@
 # Progetto-buildweek1-Team2
 
-Progetto-buildweek1-Team2
-QuizMaster è un'app interattiva che consente agli utenti di rispondere a domande vero/falso e a risposta multipla. L'app include un timer per ogni domanda, un riepilogo finale con grafico a torta e una pagina di feedback per raccogliere opinioni.
-Funzionalità principali
+
+Questo quiz consente agli utenti di verificare le proprie conoscenze attraverso la selezione di domande vero/falso e a risposta multipla.Il quiz include un timer per ogni domanda, un riepilogo finale con grafico a torta nel quale l'utente potrà riscontrare i propri risultati, e una pagina di feedback per raccogliere opinioni finali.
+
+***
+
+## Funzionalità principali
+
 
 1. Schermata di introduzione
 
-- La prima schermata mostra i termini d'uso, richiedendo all'utente di accettare di non ricevere aiuto esterno durante il quiz.
-- Solo dopo aver accettato i termini, l'utente può premere il pulsante “Proceed” per accedere al quiz.
+La prima schermata, denominata come 'Homepage.html' all'interno del progetto, mostra i termini d'uso, richiedendo all'utente di accettare di non ricevere aiuto esterno durante il quiz.
+Solo dopo aver accettato i termini, attraverso la spunta del checkbox posto accanto alla promessa, l'utente può premere il pulsante “Proceed” per accedere direttamente alla pagina del quiz vero e proprio.
 
 2. Domande del quiz
 
-- Due tipi di domande:
-  - Risposta multipla: Timer di 45 secondi per selezionare una risposta.
-  - Vero/Falso: Timer di 30 secondi per scegliere la risposta corretta.
+La seconda pagina, ovvero la pagina principale del quiz denominata come 'quiz.html', presenta il vero e proprio test a cui l'utente si sottopone composto da due tipi di domande:
+ 
+  - A risposta multipla: Il timer è impostato a 45 secondi per permettere all'utente di selezionare una risposta dai quattro bottoni che appaiono entro quel range di tempo.
+  - Vero/Falso: Il timer cambia e imposta 30 secondi per la scelta della risposta corretta all'interno di due bottoni.
+  
+  Per poter proseguire l'utente deve rispondere alle singole domande, diversamente, il bottone proceed non permetterà la prosecuzione alla domanda successiva durante il tempo a disposizione. Nel caso in cui l'utente non inserisca la risposta alla domanda allo scadere del timer automaticamente si procederà alla domanda seguente. Le domande senza alcuna risposta verranno considerate errate. 
+
 - Punteggio:
   - Risposta corretta: punti assegnati.
   - Risposta non data entro il tempo o errata: 0 punti.
